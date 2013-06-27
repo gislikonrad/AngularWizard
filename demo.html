@@ -1,0 +1,53 @@
+<html ng-app="app">
+	<head>
+		<title>Angular Wizard demo</title>
+		<meta charset="utf-8" />
+		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.min.js"></script>
+		<script src="angular-wizard.js"></script>
+		<script type="text/javascript" id="passwordStrength">
+			angular.module('app', [ 'ngWizard' ])
+				.controller('step1Controller', function($scope){
+				
+				})
+				.controller('step2Controller', function($scope){
+				
+				})
+				.config(['$routeProvider', function($routeProvider) {
+					$routeProvider.
+						when('/wizard', {
+							template: 	'<wizard>                                                                '+
+										'	<step number="1">                                                       '+
+										'		<div ng-controller="step1Controller">                               '+
+										'			<input type="text" ng-model="data.test" />                      '+
+										'			<button type="submit" ng-click="next()">Next</button>           '+
+										'		</div>                                                              '+
+										'	</step>                                                                 '+
+										'	<step number="2">                                                       '+
+										'		<div ng-controller="step2Controller">                               '+
+										'			<span>{{data.test}}</span>                                      '+
+										'			<button type="submit" ng-click="previous()">Previous</button>   '+
+										'		</div>                                                              '+
+										'	</step>                                                                 '+
+										'</wizard>'                                                                 
+						})
+						.when('/someotherroute', { template: '' })
+				}]);
+		</script>
+	</head>
+	<body ng-view>
+		<wizard id="wizard">
+			<step number="1">
+				<div ng-controller="step1Controller">
+					<input type="text" ng-model="data.test" />
+					<button type="submit" ng-click="next()">Next</button>
+				</div>
+			</step>
+			<step number="2">
+				<div ng-controller="step2Controller">
+					<span>{{data.test}}</span>
+					<button type="submit" ng-click="previous()">Previous</button>
+				</div>
+			</step>
+		</wizard>
+	</body>
+</html>
